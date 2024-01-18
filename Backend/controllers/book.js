@@ -47,6 +47,7 @@ exports.createBook = (req, res, next) => {
     })
     .catch((error) => {
       res.status(400).json({ error });
+      console.log(error);
     });
 };
 
@@ -120,4 +121,26 @@ exports.deleteOneBook = (req, res, next) => {
     });
 };
 
-// exports.rateOneBook = (req, res, next) => {};
+exports.rateOneBook = (req, res, next) => {
+  Book.findOne({ _id: req.params.id })
+
+    .then((book) => {
+      book.ratings.push({
+        userId: req.auth.userId,
+        grade: req.body.rating,
+      });
+
+      book
+        .save()
+        .then((updateBook) => {
+          res.status(201).json(updateBook);
+        })
+        .catch((error) => {
+          res.status(401).json({ error });
+          console.log(error);
+        });
+    })
+    .catch((error) => {
+      res.status(500).json({ error });
+    });
+};
