@@ -7,6 +7,7 @@ const bookSchema = mongoose.Schema({
   imageUrl: { type: String, required: true },
   year: { type: Number, required: true },
   genre: { type: String, required: true },
+  // Table of each user's ratings for a book
   ratings: [
     {
       userId: { type: String },

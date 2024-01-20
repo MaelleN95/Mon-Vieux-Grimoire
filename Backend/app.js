@@ -3,6 +3,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const path = require('path');
 
+// Import routes
 const bookRoutes = require('./routes/book');
 const userRoutes = require('./routes/user');
 
@@ -14,6 +15,7 @@ mongoose
 
 const app = express();
 
+// Automatically parses JSON data from incoming requests
 app.use(express.json());
 
 // CORS management
@@ -27,7 +29,9 @@ app.use((req, res, next) => {
   next();
 });
 
+// For each request to the Images folder, manage the resource statically
 app.use('/images', express.static(path.join(__dirname, 'images')));
+// Define routes to api/books and api/auth using the routes files
 app.use('/api/books', bookRoutes);
 app.use('/api/auth', userRoutes);
 
