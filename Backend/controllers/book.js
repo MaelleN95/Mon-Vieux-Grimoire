@@ -168,34 +168,33 @@ exports.rateOneBook = (req, res, next) => {
         if (rate.userId === req.auth.userId) {
           alreadyRated = true;
         }
-
-        alreadyRated
-          ? // If the user has already rated this book :
-            res
-              .status(403)
-              .json("Non autorisé - l'utilisateur a déjà évalué le livre")
-          : // If the user has never rated this book,
-            // Add to the ratings table the userId from auth, and the grade from the request body
-            book.ratings.push({
-              userId: req.auth.userId,
-              grade: req.body.rating,
-            });
-
-        // Add average rating refresh with averaging function
-        const updatedAverageRating = averaging(book.ratings);
-        book.averageRating = updatedAverageRating;
-
-        // Save the book in the DB
-        book
-          .save()
-          .then((updateBook) => {
-            res.status(201).json(updateBook);
-          })
-          .catch((error) => {
-            res.status(401).json({ error });
-            console.log(error);
-          });
       });
+      alreadyRated
+        ? // If the user has already rated this book :
+          res
+            .status(403)
+            .json("Non autorisé - l'utilisateur a déjà évalué le livre")
+        : // If the user has never rated this book,
+          // Add to the ratings table the userId from auth, and the grade from the request body
+          book.ratings.push({
+            userId: req.auth.userId,
+            grade: req.body.rating,
+          });
+
+      // Add average rating refresh with averaging function
+      const updatedAverageRating = averaging(book.ratings);
+      book.averageRating = updatedAverageRating;
+
+      // Save the book in the DB
+      book
+        .save()
+        .then((updateBook) => {
+          res.status(201).json(updateBook);
+        })
+        .catch((error) => {
+          res.status(401).json({ error });
+          console.log(error);
+        });
     })
     .catch((error) => {
       res.status(500).json({ error });
