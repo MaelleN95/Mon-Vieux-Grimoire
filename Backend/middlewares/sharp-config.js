@@ -9,14 +9,19 @@ const resizeAndConvertToWebp = (req, res, next) => {
     return next();
   }
 
-  // Original path & name of downloaded file
+  // Original path of downloaded file
   const originalPath = req.file.path;
-  const originalFileName = req.file.filename;
 
   // New name & path for resized file converted to WebP
   const newFileName = req.file.filename.split('.')[0] + '_resized.webp';
+  const newPath = 'images/' + newFileName;
+
+  // Updating request data
   req.file.filename = newFileName;
-  req.file.path = 'images/' + newFileName;
+  req.file.path = newPath;
+
+  // Disable Sharp's cache to inform Sharp not to save the original file in memory
+  sharp.cache(false);
 
   // Using Sharp
   sharp(originalPath)
@@ -24,20 +29,22 @@ const resizeAndConvertToWebp = (req, res, next) => {
     .resize({ height: 600 })
     // And convert
     .toFormat('webp')
-    .toFile(req.file.path, (error) => {
-      if (error) {
-        return next(error);
-      }
-
+    .toFile(newPath)
+    .then(() => {
       // Delete previous file
-      fs.unlink(`images/${originalFileName}`, (error) => {
+      fs.unlink(originalPath, (error) => {
         if (error) {
-          console.log(error);
+          console.log('Error when delete original file : ', error);
+          return next(error);
         }
       });
-
-      next();
+    })
+    .catch((error) => {
+      console.log('Error when using sharp : ', error);
+      return next(error);
     });
+
+  next();
 };
 
 module.exports = resizeAndConvertToWebp;
