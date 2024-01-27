@@ -5,7 +5,7 @@ const averaging = require('../functions/averaging');
 exports.getBooks = (req, res, next) => {
   // Get all the books
   Book.find()
-    // .sort({ title: 1 })  // Pour trier la bibliothèque par ordre alphabétique des titres
+    // .sort({ title: 1 })  // To sort the library alphabetically by title
     .then((Books) => {
       res.status(200).json(Books);
     })

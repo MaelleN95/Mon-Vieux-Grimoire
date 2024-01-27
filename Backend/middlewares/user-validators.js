@@ -13,7 +13,7 @@ exports.checkEmail = (req, res, next) => {
 // Creation of a security password schema
 const pwSchema = new pwValidator();
 pwSchema
-  .is().min(5) // Min length 60
+  .is().min(5) // Min length 5
   .is().max(60) // Max length 60
   .has().uppercase() // Must have uppercase letters
   .has().lowercase() // Must have lowercase letters
