@@ -21,6 +21,12 @@
 
 ## Description
 
+Ce projet consiste à développer le back-end d'un site de notation de livres nommé Mon Vieux Grimoire. Le site permettra aux membres d'ajouter des livres, de les noter, et de voir les évaluations publiques. Le serveur est construit avec **Express** et **MongoDB**, en utilisant **Mongoose** pour la gestion des données. Le projet suit une **architecture MVC** (Modèle-Vue-Contrôleur) et intègre des pratiques de **Green Code** pour optimiser les performances et réduire l'empreinte écologique.
+
+Il est à noter que la partie front-end a été réalisée par l'organisme de formation, dans le cadre d'un scénario de collaboration. Mon rôle s'est concentré exclusivement sur le développement du back-end, sans intervention aux aspects visuels ou à la structure du front-end.
+
+Ce projet fait partie de ma formation sur OpenClassrooms pour le parcours [Développeur Web](https://openclassrooms.com/fr/paths/899-developpeur-web).
+
 ## Fonctionnalités
 
 - Gestion des utilisateurs avec **authentification sécurisée** (JWT)
