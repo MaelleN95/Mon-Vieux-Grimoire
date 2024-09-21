@@ -80,7 +80,7 @@ Cette section présente les spécifications de l'API mise en place pour la gesti
 
 - **Hachage des mots de passe** : Tous les mots de passe des utilisateurs sont hachés pour assurer leur sécurité.
 - **Authentification renforcée** : L'accès aux routes de gestion des livres nécessite une authentification via un token JWT dans l'en-tête d'autorisation (« Bearer »).
-- **Validation des utilisateurs** : Les modifications d'un livre sont limitées au propriétaire du livre. En cas de non-correspondance entre l'ID de l'utilisateur et l'ID du livre, une réponse `403: unauthorized request` est renvoyée.
+- **Validation des utilisateurs** : Les modifications d'un livre sont limitées au propriétaire du livre. En cas de non-correspondance entre l'ID de l'utilisateur et l'ID du propriétaire du livre, une réponse `403: unauthorized request` est renvoyée.
 - **Unicité des adresses électroniques** : Les adresses électroniques sont uniques dans la base de données, avec des mécanismes Mongoose pour garantir cette unicité et signaler les erreurs.
 
 ### Modèles de Données
