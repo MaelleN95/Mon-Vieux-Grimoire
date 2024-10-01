@@ -46,7 +46,8 @@ Ce projet fait partie de ma formation sur OpenClassrooms pour le parcours [Déve
 
 1. Clonez le repository :
    ```bash
-   git https://github.com/MaelleN95/Mon-Vieux-Grimoire.git
+   git clone https://github.com/MaelleN95/Mon-Vieux-Grimoire.git
+   cd Mon-Vieux-Grimoire
 2. Installez les dépendances du back-end :
    ```bash
    cd Backend
